@@ -1,0 +1,6 @@
+curl -X POST http://localhost:8080/biblioteca/livros \
+-H "Content-Type: application/json" \
+-d '{
+  "titulo": "New Livro Title",
+  "isbn": "1234567890"
+}'

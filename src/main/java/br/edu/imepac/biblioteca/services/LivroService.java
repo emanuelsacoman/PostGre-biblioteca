@@ -48,4 +48,22 @@ public class LivroService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado."));
         livroRepository.delete(livro);
     }
+
+    public LivroDto saveLivro(LivroRequestDto livroRequestDto) {
+        if(livroRequestDto.getTitulo().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Titulo não pode ser vazio.");
+        }
+
+        if(livroRequestDto.getIsbn().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ISBN não pode ser vazio.");
+        }
+
+        Livro livro = new Livro();
+        livro.setTitulo(livroRequestDto.getTitulo());
+        livro.setIsbn(livroRequestDto.getIsbn());
+
+        livroRepository.save(livro);
+
+        return new LivroDto(livro.getId(), livro.getTitulo(), livro.getIsbn());
+    }
 }

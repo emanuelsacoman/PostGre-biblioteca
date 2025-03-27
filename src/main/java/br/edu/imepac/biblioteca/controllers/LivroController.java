@@ -16,6 +16,12 @@ public class LivroController {
         this.livroService = livroService;
     }
 
+
+    @PostMapping
+    public LivroDto addLivro(@RequestBody LivroRequestDto livroUpdateDto) throws Exception {
+        return livroService.saveLivro(livroUpdateDto);
+    }
+
     @GetMapping("/{id}")
     public LivroDto getLivroById(@PathVariable Long id) throws Exception {
         return livroService.getLivroById(id);

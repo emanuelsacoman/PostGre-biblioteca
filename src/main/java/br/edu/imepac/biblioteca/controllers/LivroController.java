@@ -16,23 +16,23 @@ public class LivroController {
         this.livroService = livroService;
     }
 
-
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
     public LivroDto addLivro(@RequestBody LivroRequestDto livroUpdateDto) throws Exception {
         return livroService.saveLivro(livroUpdateDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public LivroDto getLivroById(@PathVariable Long id) throws Exception {
         return livroService.getLivroById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
     public LivroDto updateLivro(@PathVariable Long id, @RequestBody LivroRequestDto livroUpdateDto) throws Exception {
         return livroService.updateLivro(id, livroUpdateDto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = "application/json")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteLivro(@PathVariable Long id) throws Exception {
         livroService.deleteLivro(id);

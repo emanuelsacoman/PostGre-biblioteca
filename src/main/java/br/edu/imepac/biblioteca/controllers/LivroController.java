@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/livros")
 public class LivroController {
+    /*
+    Injeção de dependência do serviço de livros
+
+    O Spring Boot é responsável por criar uma instância do LivroService e passar para o construtor do LivroController.
+    */
 
     private final LivroService livroService;
 
@@ -18,8 +23,8 @@ public class LivroController {
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public LivroDto addLivro(@RequestBody LivroRequestDto livroUpdateDto) throws Exception {
-        return livroService.saveLivro(livroUpdateDto);
+    public LivroDto addLivro(@RequestBody LivroRequestDto livroRequestDto) throws Exception {
+        return livroService.saveLivro(livroRequestDto);
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
